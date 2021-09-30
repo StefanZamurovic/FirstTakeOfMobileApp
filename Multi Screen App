@@ -1,0 +1,133 @@
+import * as React from 'react';
+import { StyleSheet, Button, View, SafeAreaView, Text, Alert, Image, TextInput } from 'react-native';
+import Constants from 'expo-constants';
+
+
+// or any pure javascript modules available in npm
+import { Card } from 'react-native-paper';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: "black"}}>
+      <Text style={styles.text1}>!!STAT!! !!TRACKER!!</Text>
+      <Text style={{color: "white"}}>By Sergapo Industries</Text>
+      <View style={{ flex: 0.25, justifyContent: 'flex-end', alignItems: 'center', backgroundColor: "black"}}>
+      <Button
+        title="Start"
+        color
+      />
+    </View>
+      <View style={{ flex: 0.5, justifyContent: 'flex-end', alignItems: 'center', backgroundColor: "black"}}>
+      <Text style={{color: "white", justifyContent: 'center', textAlign: 'center',}}>Check out the About Page to learn more or Preference to make some changes</Text>
+    </View>
+    </View>
+    
+  );
+}
+
+function AboutScreen() {
+  return (
+    <View style={{ flex: 3, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: "black" }}>
+      <Text style={styles.text1}>ABOUT</Text>
+      <View style={{ flex: 0.5, justifyContent: 'space-between', alignItems: 'center', backgroundColor: "black" }}>
+      <Text style={{color: "white", justifyContent: 'center', textAlign: 'center',}}>
+      >This app is desgined to make tracking stats simpler and easier for everyone
+      </Text>
+      <Text style={{color: "white", justifyContent: 'center', textAlign: 'center',}}>
+      >There are easy to use steps to add different players to the app so it is easy to set up your whole team
+      </Text>
+      <Text style={{color: "white", justifyContent: 'center', textAlign: 'center',}}>
+      </Text>
+      <Text style={{color: "white", justifyContent: 'center', textAlign: 'center',}}>
+      >There are easy to use steps to add different types of stats you would like to track
+      </Text>
+      <Text style={{color: "white", justifyContent: 'center', textAlign: 'center',}}>
+      >Also you can choose the weight of each stat and the app will calculate the value of the player
+      </Text>
+      </View>
+      <View style={{ flex: 0.5, justifyContent: 'flex-end', alignItems: 'center', backgroundColor: "black" }}>
+      <Image
+        style={styles.box}
+        source={require('./assets/download.png')}
+      />
+      </View>
+    </View>
+  );
+}
+
+function PreferenceScreen() {
+  const [text, onChangeText] = React.useState("Useless Text");
+  const [number, onChangeNumber] = React.useState(null);
+  return (
+    <View style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: "black"}}>
+      <Text style={{fontSize: 60, justifyContent: 'center', textAlign: 'center', color: 'white'}}>
+      PREFERENCE
+      </Text>
+      <Text style={{fontSize: 25, justifyContent: 'center', textAlign: 'center', color: 'white'}}>
+      Name Change
+      </Text>
+      <SafeAreaView>
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeNumber}
+        value={number}
+        placeholder="Enter New Name"
+        keyboardType="numeric"
+      />
+    </SafeAreaView>
+    <Button
+        title="Submit"
+        color
+      />
+    </View>
+  );
+}
+
+
+
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="About" component={AboutScreen} />
+        <Tab.Screen name="Preference" component={PreferenceScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+const Stack = createStackNavigator();
+
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Notifications" component={Notifications} />
+      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Preference" component={PreferenceScreen} />
+    </Stack.Navigator>
+  );
+}
+
+const styles = StyleSheet.create({
+
+  text1:{
+    fontSize: 64,
+    justifyContent: 'center',
+    textAlign: 'center',
+    color: 'white'
+  },
+  input: {
+    backgroundColor: "white",
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+});
